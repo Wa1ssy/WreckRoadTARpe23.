@@ -16,4 +16,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Wreck-Road.Data\Wreck-Road.Data.csproj" />
+  </ItemGroup>
+
 </Project>
