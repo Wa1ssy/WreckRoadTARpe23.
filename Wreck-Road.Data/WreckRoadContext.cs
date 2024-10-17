@@ -8,7 +8,7 @@ using Wreck_RoadContext.Core.Domain;
 
 namespace Wreck_RoadContext.Data
 {
-    internal class Wreck_RoadContext : DbContext
+    public class WreckRoadContext : DbContext
     {
         public DbSet<Car> Cars { get; set; }
     }

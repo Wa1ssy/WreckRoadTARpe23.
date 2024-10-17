@@ -8,7 +8,7 @@ namespace Wreck_RoadContext.Core.Domain
 {
     public enum CarType
     {
-        Honda, BMW, Audi, Mercedes, Toyota, Lamborghini, Porsche, Ferrari, Ford, Mitsubishi, Volvo, Saab, Unknown
+        Honda, BMW, Audi, Mercedes, Toyota, Lamborghini, Porsche, Ferrari, Ford, Mitsubishi, Volvo, Saab, Chevy, Unknown
     }
 
     public enum CarStatus
