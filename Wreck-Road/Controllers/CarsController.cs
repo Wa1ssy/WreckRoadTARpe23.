@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Wreck_RoadContext.Data;
+using Wreck_RoadContext.Models.Cars;
 
 namespace Wreck_Road.Controllers
 {
@@ -7,8 +9,29 @@ namespace Wreck_Road.Controllers
         /*
          CarsController controls all functions for cars including Missions
          */
+        private readonly WreckRoadContext _context;
+        private readonly ICarsServices _carsservices;
+
+        public CarsController(WreckRoadContext context, ICarsServices carsServices)
+        {
+            _context = context;
+            _carsservices = carsServices;
+        }
+
+        [HttpGet]
         public IActionResult Index()
         {
+            var resultingInventory = _context.Cars
+                .OrderByDescending(y => y.CarLevel)
+                .Select(x => new CarIndexViewModel
+                {
+                    ID = x.ID,
+                    CarName = x.CarName,
+                    CarType = (CarType)x.CarType,
+                    CarStatus = (CarStatus)x.CarStatus,
+                    CarLevel = x.CarLevel,
+                    BuiltAt = x.BuiltAt,
+                });
             return View();
         }
     }
