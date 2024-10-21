@@ -1,15 +1,23 @@
-﻿namespace WreckRoad.Models.Cars
+﻿using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Wreck_Road.Core.Domain.Dto;
+
+namespace Wreck_RoadContext.Core.Domain.Dto
 {
     public enum CarType
     {
-        Honda, BMW, Audi, Mercedes, Toyota, Lamborghini, Porsche, Ferrari, Ford, Mitsubishi, Volvo, Saab, Unknown
+        Honda, BMW, Audi, Mercedes, Toyota, Lamborghini, Porsche, Ferrari, Ford, Mitsubishi, Volvo, Saab, Chevy, Unknown
     }
 
     public enum CarStatus
     {
         Alive, Crashed, Riding
     }
-    public class CarIndexViewModel
+    public class CarDto
     {
         public Guid ID { get; set; }
         public string CarName { get; set; }
@@ -22,6 +30,11 @@
         public string TurnName { get; set; }
         public DateTime CarWasBuilt { get; set; }
         public DateTime CarCrashed { get; set; }
+
+        //image
+
+        public List<IFormFile> Files { get; set; }
+        public IEnumerable<FilesToDatabaseDto> Image { get; set; } = new List<FilesToDatabaseDto>();
 
         //db only
         public DateTime BuiltAt { get; set; }

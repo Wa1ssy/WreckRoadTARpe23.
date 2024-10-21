@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Wreck-Road.Core\Wreck-Road.Core.csproj" />
+    <ProjectReference Include="..\Wreck-Road.Data\Wreck-Road.Data.csproj" />
+  </ItemGroup>
+
 </Project>
