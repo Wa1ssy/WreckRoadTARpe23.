@@ -29,8 +29,8 @@ namespace WreckRoad.Controllers
                 {
                     ID = x.ID,
                     CarName = x.CarName,
-                    CarType = (CarType)x.CarType,
-                    CarStatus = (CarStatus)x.CarStatus,
+                    CarType = (Models.Cars.CarType)x.CarType,
+                    CarStatus = (Models.Cars.CarStatus)x.CarStatus,
                     CarLevel = x.CarLevel,
                     BuiltAt = x.BuiltAt,
                 });
@@ -72,8 +72,10 @@ namespace WreckRoad.Controllers
 
             if (result != null)
             {
-                return View("";
+                return RedirectToAction("Index");
             }
+
+            return RedirectToAction("Index", vm);
         }
     }
 }

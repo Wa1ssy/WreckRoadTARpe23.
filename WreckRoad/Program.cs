@@ -1,11 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using WreckRoad.ApplicationServices.Services;
+using WreckRoad.Core.Serviceinterface;
 using WreckRoad.Core.ServiceInterface;
 using WreckRoad.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<ICarsServices, CarServices>();
+builder.Services.AddScoped<IFileServices, FileServices>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<WreckRoadContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
