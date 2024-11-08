@@ -13,5 +13,6 @@ namespace WreckRoad.Core.ServiceInterface
         Task<Car> DetailsAsync(Guid id);
 
         Task<Car> Create(CarDto dto);
+        Task<Car> Update(CarDto dto);
     }
 }

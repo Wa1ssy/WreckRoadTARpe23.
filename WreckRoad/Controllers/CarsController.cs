@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using WreckRoad.ApplicationServices.Services;
+using WreckRoad.Core.Domain;
 using WreckRoad.Core.Dto;
 using WreckRoad.Core.ServiceInterface;
 using WreckRoad.Data;
 using WreckRoad.Models.Cars;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WreckRoad.Controllers
 {
@@ -42,11 +46,13 @@ namespace WreckRoad.Controllers
             CarCreateViewModel vm = new();
             return View("Create", vm);
         }
-        [HttpPost]
+        [HttpPost, ActionName("Create")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CarCreateViewModel vm)
         {
             var dto = new CarDto()
             {
+                ID = (Guid)vm.ID,
                 CarName = vm.CarName,
                 CarXP = 0,
                 CarXPNextLevel = 100,
@@ -75,6 +81,119 @@ namespace WreckRoad.Controllers
                 return RedirectToAction("Index");
             }
 
+            return RedirectToAction("Index", vm);
+        }
+        
+        public async Task<IActionResult> Details(Guid id /* guid ref*/)
+        {
+            var car = await _carsservices.DetailsAsync(id);
+            
+            if(car == null)
+            {
+                return NotFound();
+            }
+
+            var images = await _context.FilesToDatabase
+                .Where(c => c.CarID == id)
+                .Select( y => new CarImageViewModel
+                {
+                    CarID = y.ID,
+                    ImageID = y.ID,
+                    ImageData = y.ImageData,
+                    ImageTitle = y.ImageTitle,
+                    Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData)),
+                }).ToArrayAsync();
+
+            var vm = new CarDetailsViewModel();
+            vm.ID = car.ID;
+            vm.CarName = car.CarName;
+            vm.CarXP = car.CarXP;
+            vm.CarLevel = car.CarLevel;
+            vm.CarType = (Models.Cars.CarType)car.CarType;
+            vm.CarStatus = (Models.Cars.CarStatus)car.CarStatus;
+            vm.TurnName = car.TurnName;
+            vm.TurnSpeed = car.TurnSpeed;
+            vm.Image.AddRange(images);
+
+            return View(vm);
+        }
+
+        [HttpGet]
+
+        public async Task<IActionResult> Update(Guid id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var car = await _carsservices.DetailsAsync(id);
+            
+            if (car == null)
+            {
+                return NotFound();
+            }
+            var images = await _context.FilesToDatabase
+                .Where(x => x.CarID == id)
+                 .Select(y => new CarImageViewModel
+                 {
+                     CarID = y.ID,
+                     ImageID = y.ID,
+                     ImageData = y.ImageData,
+                     ImageTitle = y.ImageTitle,
+                     Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData)),
+                 }).ToArrayAsync();
+
+            var vm = new CarCreateViewModel();
+            vm.ID = car.ID;
+            vm.CarName = car.CarName;
+            vm.CarXP = car.CarXP;
+            vm.CarXPNextLevel = car.CarXPNextLevel;
+            vm.CarLevel = car.CarLevel;
+            vm.CarType = (Models.Cars.CarType)car.CarType;
+            vm.CarStatus = (Models.Cars.CarStatus)car.CarStatus;
+            vm.TurnName = car.TurnName;
+            vm.TurnSpeed = car.TurnSpeed;
+            vm.CarCrashed = car.CarCrashed;
+            vm.CarWasBuilt = car.CarWasBuilt;
+            vm.BuiltAt = car.BuiltAt;
+            vm.UpdatedAt = DateTime.Now;
+            vm.Image.AddRange(images);
+
+            return View("Update", vm);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update(CarCreateViewModel vm)
+        {
+            var dto = new CarDto()
+            {
+                ID = (Guid)vm.ID,
+                CarName = vm.CarName,
+                CarXP = 0,
+                CarXPNextLevel = 100,
+                CarLevel = 0,
+                CarType = (Core.Dto.CarType)vm.CarType,
+                CarStatus = (Core.Dto.CarStatus)vm.CarStatus,
+                TurnName = vm.TurnName,
+                TurnSpeed = vm.TurnSpeed,
+                CarWasBuilt = vm.CarWasBuilt,
+                BuiltAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+                Files = vm.Files,
+                Image = vm.Image
+                .Select(x => new FilesToDatabaseDto
+                {
+                    ID = x.ImageID,
+                    ImageData = x.ImageData,
+                    ImageTitle = x.ImageTitle,
+                    CarID = x.CarID,
+                }).ToArray()
+            };
+            var result = await _carsservices.Update(dto);
+            if (result == null)
+            {
+                return RedirectToAction("Index");
+            }
             return RedirectToAction("Index", vm);
         }
     }

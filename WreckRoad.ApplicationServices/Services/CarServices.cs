@@ -41,6 +41,7 @@ namespace WreckRoad.ApplicationServices.Services
 
 
             //set by user
+           car.CarName = dto.CarName;
             car.CarType = (Core.Domain.CarType)dto.CarType;
             car.TurnName = dto.TurnName;
             car.TurnSpeed = dto.TurnSpeed;
@@ -56,6 +57,40 @@ namespace WreckRoad.ApplicationServices.Services
             }
 
             await _context.Cars.AddAsync(car);
+            await _context.SaveChangesAsync();
+
+            return car;
+        }
+
+        public async Task<Car> Update (CarDto dto)
+        {
+            Car car = new();
+
+            car.ID = dto.ID;
+            car.CarXP = dto.CarXP;
+            car.CarXPNextLevel = dto.CarXPNextLevel;
+            car.CarLevel = dto.CarLevel;
+            car.CarStatus = (Core.Domain.CarStatus)dto.CarStatus;
+            car.CarWasBuilt = dto.CarWasBuilt;
+            car.CarCrashed = (DateTime)dto.CarCrashed;
+
+
+            //set by user
+            car.CarName = dto.CarName;
+            car.CarType = (Core.Domain.CarType)dto.CarType;
+            car.TurnName = dto.TurnName;
+            car.TurnSpeed = dto.TurnSpeed;
+
+            //set for db
+            car.BuiltAt = dto.BuiltAt;
+            car.UpdatedAt = DateTime.Now;
+
+            //files
+            if (dto.Files != null)
+            {
+                _fileServices.UploadFilesToDatabase(dto, car);
+            }
+            _context.Cars.Update(car);
             await _context.SaveChangesAsync();
 
             return car;
