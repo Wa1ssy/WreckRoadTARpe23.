@@ -33,6 +33,9 @@
                     <td>@car.CarLevel</td>
                     <td>@car.CarStatus</td>
                     <td>@car.CarWasBuilt</td>
+                    <td>
+                        <a asp-action="details" asp-controller="cars" asp-route-id="@car.ID" class="btn btn-info">Car details</a>
+                    </td>
                 </tr>
                 rowNumber++;
             }

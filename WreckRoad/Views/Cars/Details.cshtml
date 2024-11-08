@@ -1,0 +1,52 @@
+﻿
+@model WreckRoad.Models.Cars.CarDetailsViewModel
+
+<h1> @Html.DisplayFor(model => model.CarName) </h1>
+
+<div>
+    <h4>Car Info:</h4>
+    <hr />
+    <dl class="row">
+        <div class="form-group row">
+            <label asp-for="ID" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.ID)
+        </div>
+        <div id="imagediv">
+            @foreach (var image in Model.Image)
+            {
+                <partial name="_Images" model="image" />
+            }}
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="CarName" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.CarName)
+        </div>
+        <div class="form-group row">
+            <label asp-for="CarLevel" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.CarLevel)
+        </div>
+        @* Todo: combine carxp and carxpnext level into one progress bar*@
+        <div class="form-group row">
+            <label asp-for="CarXP" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.CarXP)
+        </div>
+        <div class="form-group row">
+            <label asp-for="CarXPNextLevel" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.CarXPNextLevel)
+        </div>
+        <div class="form-group row">
+            <label asp-for="CarStatus" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.CarStatus)
+        </div>
+        <div class="form-group row">
+            <label asp-for="TurnName" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.TurnName)
+            <label asp-for="TurnSpeed" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.TurnSpeed)
+        </div>
+
+    </dl>
+
+    <a asp-action="Index" asp-controller="cars" class="btn btn-secondary">Index</a>
+</div>
