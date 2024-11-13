@@ -35,6 +35,10 @@
                     <td>@car.CarWasBuilt</td>
                     <td>
                         <a asp-action="details" asp-controller="cars" asp-route-id="@car.ID" class="btn btn-info">Car details</a>
+                        <br />
+                        <a asp-action="update" asp-controller="cars" asp-route-id="@car.ID" class="btn btn-info">Car tuning</a>
+                        <br />
+                        <a asp-action="delete" asp-controller="cars" asp-route-id="@car.ID" class="btn btn-info">Wreck Car</a>
                     </td>
                 </tr>
                 rowNumber++;

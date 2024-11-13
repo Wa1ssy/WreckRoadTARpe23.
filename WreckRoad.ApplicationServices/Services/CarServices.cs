@@ -72,7 +72,7 @@ namespace WreckRoad.ApplicationServices.Services
             car.CarLevel = dto.CarLevel;
             car.CarStatus = (Core.Domain.CarStatus)dto.CarStatus;
             car.CarWasBuilt = dto.CarWasBuilt;
-            car.CarCrashed = (DateTime)dto.CarCrashed;
+            car.CarCrashed = DateTime.Parse("01/01/9999 00:00:00");
 
 
             //set by user
@@ -94,6 +94,16 @@ namespace WreckRoad.ApplicationServices.Services
             await _context.SaveChangesAsync();
 
             return car;
+        }
+
+        public async Task<Car> Delete(Guid id)
+        {
+            var result = await _context.Cars
+                .FirstOrDefaultAsync(x => x.ID == id);
+            _context.Cars.Remove(result);
+            await _context.SaveChangesAsync();
+
+            return result;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 
 using WreckRoad.Core.Domain;
 using WreckRoad.Core.Dto;
@@ -44,6 +45,21 @@ namespace WreckRoad.ApplicationServices.Services
                     }
                 }
             }
+        }
+        public async Task<FileToDatabase> RemoveImageFromDatabase(FilesToDatabaseDto dto)
+        {
+            var imageID = await _context.FilesToDatabase
+                .FirstOrDefaultAsync(x => x.ID == dto.ID);
+            var filePath = _webHost.ContentRootPath + "\\multipleFileUpload\\" + imageID.ImageData;
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+
+            _context.FilesToDatabase.Remove(imageID);
+            await _context.SaveChangesAsync();
+
+            return null;
         }
     }
 }
