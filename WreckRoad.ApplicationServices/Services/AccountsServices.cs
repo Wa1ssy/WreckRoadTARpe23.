@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WreckRoad.Core.Domain;
+using WreckRoad.Core.ServiceInterface;
 
 namespace WreckRoad.ApplicationServices.Services
 {
-    public class AccountsServices : IAccountServices
+    public class AccountsServices : IAccountsServices
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
