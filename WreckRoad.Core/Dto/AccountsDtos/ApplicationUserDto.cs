@@ -8,7 +8,7 @@ namespace WreckRoad.Core.Dto.AccountsDtos
 {
     public class ApplicationUserDto
     {
-        public int City {  get; set; }
+        public string City {  get; set; }
         public string USerName { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
