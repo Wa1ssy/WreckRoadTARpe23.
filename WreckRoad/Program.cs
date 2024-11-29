@@ -18,7 +18,7 @@ builder.Services.AddDbContext<WreckRoadContext>(
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
     {
         options.SignIn.RequireConfirmedAccount = true;
-        options.Password.RequiredLength = 3;
+        options.Password.RequiredLength = 3; 
 
         options.Tokens.EmailConfirmationTokenProvider = "CustomEmailConfirmation";
         options.Lockout.MaxFailedAccessAttempts = 3;
