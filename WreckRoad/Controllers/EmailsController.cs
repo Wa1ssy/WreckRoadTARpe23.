@@ -1,16 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WreckRoad.Core.Dto;
+using WreckRoad.Core.ServiceInterface;
 using WreckRoad.Models.Emails;
 
 namespace WreckRoad.Controllers
 {
     public class EmailsController : Controller
     {
-        private readonly IEmailServices _emailServices;
+        private readonly IEmailsServices _emailsServices;
 
-        public EmailsController(IEmailServices emailServices)
+        public EmailsController(IEmailsServices emailServices)
         {
-            _emailServices = emailServices;
+            _emailsServices = emailServices;
         }
 
         public IActionResult Index()
@@ -19,7 +20,7 @@ namespace WreckRoad.Controllers
         }
 
         [HttpPost]
-        public IActionResult SendEmail(EmailViewModel viewModel) 
+        public IActionResult SendEmail(EmailViewModel viewModel)
         {
             var dto = new EmailDto()
             {
@@ -27,7 +28,20 @@ namespace WreckRoad.Controllers
                 Subject = viewModel.Subject,
                 Body = viewModel.Body,
             };
-            _emailServices.SendEmail(dto);
+            _emailsServices.SendEmail(dto);
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpPost]
+        public IActionResult SendTokenEmail(EmailViewModel viewModel, string token)
+        {
+            var dto = new EmailTokenDto()
+            {
+                To = viewModel.To,
+                Subject = viewModel.Subject,
+                Body = viewModel.Body,
+                Token = token
+            };
+            _emailsServices.SendEmailToken(dto, token);
             return RedirectToAction(nameof(Index));
         }
     }
