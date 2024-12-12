@@ -269,4 +269,15 @@ namespace WreckRoad.Controllers
             return RedirectToAction("Index");
         }
     }
+
+    /* CAR OWNERSHIP */
+
+    [HttpPost, ActionName("CreateCarOwnership")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> CreateRandomCarOwnership(CarOwnershipFromStoryViewModel vm)
+    {
+        int RNG = new Random().Next(1, _context.Cars.Count());
+
+        var sourceCar = await _context.Cars.OrderByDescending(x => x.CarName).Take(RNG);
+    }
 }
