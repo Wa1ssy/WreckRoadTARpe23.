@@ -7,9 +7,39 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\**" />
-    <EmbeddedResource Remove="Migrations\**" />
-    <None Remove="Migrations\**" />
+    <Compile Include="obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" />
+    <Compile Include="obj\Debug\net8.0\WreckRoad.Data.AssemblyInfo.cs" />
+    <Compile Include="obj\Debug\net8.0\WreckRoad.Data.GlobalUsings.g.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="bin\Debug\net8.0\WreckRoad.Data.deps.json" />
+    <Content Include="bin\Debug\net8.0\WreckRoad.Data.runtimeconfig.json" />
+    <Content Include="obj\Debug\net8.0\WreckRoad.Data.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\net8.0\WreckRoad.Data.sourcelink.json" />
+    <Content Include="obj\project.assets.json" />
+    <Content Include="obj\WreckRoad.Data.csproj.nuget.dgspec.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Debug\net8.0\WreckRoad.Core.dll" />
+    <None Include="bin\Debug\net8.0\WreckRoad.Core.pdb" />
+    <None Include="bin\Debug\net8.0\WreckRoad.Data.dll" />
+    <None Include="bin\Debug\net8.0\WreckRoad.Data.pdb" />
+    <None Include="obj\Debug\net8.0\refint\WreckRoad.Data.dll" />
+    <None Include="obj\Debug\net8.0\ref\WreckRoad.Data.dll" />
+    <None Include="obj\Debug\net8.0\WreckRoa.F4F30FA4.Up2Date" />
+    <None Include="obj\Debug\net8.0\WreckRoad.Data.AssemblyInfoInputs.cache" />
+    <None Include="obj\Debug\net8.0\WreckRoad.Data.assets.cache" />
+    <None Include="obj\Debug\net8.0\WreckRoad.Data.csproj.AssemblyReference.cache" />
+    <None Include="obj\Debug\net8.0\WreckRoad.Data.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\net8.0\WreckRoad.Data.dll" />
+    <None Include="obj\Debug\net8.0\WreckRoad.Data.GeneratedMSBuildEditorConfig.editorconfig" />
+    <None Include="obj\Debug\net8.0\WreckRoad.Data.genruntimeconfig.cache" />
+    <None Include="obj\Debug\net8.0\WreckRoad.Data.pdb" />
+    <None Include="obj\project.nuget.cache" />
+    <None Include="obj\WreckRoad.Data.csproj.nuget.g.props" />
+    <None Include="obj\WreckRoad.Data.csproj.nuget.g.targets" />
   </ItemGroup>
 
   <ItemGroup>

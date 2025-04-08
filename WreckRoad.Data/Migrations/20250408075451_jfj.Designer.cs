@@ -12,8 +12,8 @@ using WreckRoad.Data;
 namespace WreckRoad.Data.Migrations
 {
     [DbContext(typeof(WreckRoadContext))]
-    [Migration("20241108073521_123123123")]
-    partial class _123123123
+    [Migration("20250408075451_jfj")]
+    partial class jfj
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

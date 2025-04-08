@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WreckRoad.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class _123321 : Migration
+    public partial class jfj : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
