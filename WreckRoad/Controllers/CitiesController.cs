@@ -33,7 +33,7 @@ namespace WreckRoad.Controllers
                 {
                     ID = x.ID,
                     Name = x.Name,
-                    Difficulty = (WreckRoad.Models.Cities.Difficulty)x.Difficulty,
+                    Difficulty = (Models.Cities.Difficulty)x.Difficulty,
                     CarLevelRequirement = x.CarLevelRequirement,
                 })
                 .ToList();

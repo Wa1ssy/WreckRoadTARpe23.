@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<ICarsServices, CarServices>();
 builder.Services.AddScoped<IFileServices, FileServices>();
+builder.Services.AddScoped<ICitiesServices, CitiesServices>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<WreckRoadContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
