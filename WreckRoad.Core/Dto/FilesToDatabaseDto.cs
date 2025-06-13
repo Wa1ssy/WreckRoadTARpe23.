@@ -13,5 +13,6 @@ namespace WreckRoad.Core.Dto
         public string ImageTitle { get; set; }
         public byte[] ImageData { get; set; }
         public Guid? CarID { get; set; }
-    }
+		public Guid? CityID { get; set; }
+	}
 }

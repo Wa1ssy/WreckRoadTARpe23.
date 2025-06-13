@@ -9,5 +9,6 @@ namespace WreckRoad.Data
         public WreckRoadContext(DbContextOptions<WreckRoadContext> options) : base(options) { }
         public DbSet<Car> Cars { get; set; }
         public DbSet<FileToDatabase> FilesToDatabase { get; set; }
-    }
+		public DbSet<City> Cities { get; set; }
+	}
 }
